@@ -1,0 +1,103 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct TreeNode;
+typedef struct TreeNode *SearchTree;
+SearchTree T,tree=NULL;
+
+struct TreeNode{
+    SearchTree left;
+    int element;
+    SearchTree right;
+};
+
+int num;
+SearchTree root(){
+    printf("%d is the root ",T->element);
+    main();
+}
+SearchTree insert(SearchTree T,int num){
+    
+    if(T==NULL){
+        T=malloc(sizeof(struct TreeNode));
+        if(T!=NULL){
+            T->element=num;
+            T->left=NULL;
+            T->right=NULL;
+            main();
+        }
+    }
+    else{
+        if(num<T->element){
+            T->left=insert(T->left,num);
+            main();
+        }
+        else{
+            if(num>T->element){
+                T->right=insert(T->right,num);
+                main();
+            }
+            }
+            
+        }
+        return T;
+    }
+    
+void inorder(){
+    if(T!=NULL){
+    inorder(T->left);
+    printf("%d\t",T->element);
+    inorder(T->right);
+    main();
+    }
+}
+
+void preorder(){
+    if(T!=NULL){
+        printf("%d\t",T->element);
+        preorder(T->left);
+        preorder(T->right);
+        main();
+    }
+}
+
+void postorder(){
+    if(T!=NULL){
+    postorder(T->left);
+    postorder(T->right);
+    printf("%d\t",T->element);
+    main();
+    }
+}
+
+
+int main()
+{   
+    int choice;
+    printf("\n1.Insert\n2.InOrder\n3.PreOrder\n4.PostOrder\n5.MakeEmpty\n6.Root\n7.Exit");
+    printf("\nEnter your choice: ");
+    scanf("%d",&choice);
+    switch(choice){
+        case 1:
+        printf("\nEnter element: ");
+        scanf("%d",&num);
+        tree=insert(tree,num);
+        break;
+        case 2:
+        inorder();
+        break;
+        case 3:
+        preorder();
+        break;
+        case 4:
+        postorder();
+        break;
+        case 6:
+        root();
+        break;
+        case 5:
+        exit(0);
+        default:
+        printf("\nEnter valid choice....");
+    }
+    return 0;
+}
